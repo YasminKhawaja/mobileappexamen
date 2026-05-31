@@ -1,20 +1,42 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+} from "react-native";
 
 export default function HomeScreen({ navigation }) {
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
-    <ScrollView style={styles.page}>
+    <ScrollView style={[styles.page, darkMode && styles.darkPage]}>
       <View style={styles.header}>
         <View style={styles.logo}>
           <Text style={styles.logoText}>BA</Text>
         </View>
 
-        <Text style={styles.schoolName}>Busleyden Atheneum</Text>
+        <Text style={[styles.schoolName, darkMode && styles.darkText]}>
+          Busleyden Atheneum
+        </Text>
+      </View>
+
+      <View style={[styles.switchRow, darkMode && styles.darkCard]}>
+        <Text style={[styles.switchText, darkMode && styles.darkText]}>
+          Dark mode
+        </Text>
+
+        <Switch value={darkMode} onValueChange={setDarkMode} />
       </View>
 
       <View style={styles.hero}>
-        <Text style={styles.title}>Eén school, vele mogelijkheden</Text>
+        <Text style={[styles.title, darkMode && styles.darkText]}>
+          Eén school, vele mogelijkheden
+        </Text>
 
-        <Text style={styles.subtitle}>
+        <Text style={[styles.subtitle, darkMode && styles.darkSubText]}>
           Ontdek een school waar talent bloeit en elke leerling zijn eigen pad
           vindt.
         </Text>
@@ -29,41 +51,51 @@ export default function HomeScreen({ navigation }) {
 
       <View style={styles.menu}>
         <Pressable
-          style={styles.card}
+          style={[styles.card, darkMode && styles.darkCard]}
           onPress={() => navigation.navigate("StudyFinder")}
         >
-          <Text style={styles.cardTitle}>Studiekiezer</Text>
-          <Text style={styles.cardText}>
+          <Text style={[styles.cardTitle, darkMode && styles.darkText]}>
+            Studiekiezer
+          </Text>
+          <Text style={[styles.cardText, darkMode && styles.darkSubText]}>
             Zoek een opleiding die bij jou past.
           </Text>
         </Pressable>
 
         <Pressable
-          style={styles.card}
+          style={[styles.card, darkMode && styles.darkCard]}
           onPress={() => navigation.navigate("Campuses")}
         >
-          <Text style={styles.cardTitle}>Campussen</Text>
-          <Text style={styles.cardText}>
+          <Text style={[styles.cardTitle, darkMode && styles.darkText]}>
+            Campussen
+          </Text>
+          <Text style={[styles.cardText, darkMode && styles.darkSubText]}>
             Bekijk de verschillende campussen.
           </Text>
         </Pressable>
 
         <Pressable
-          style={styles.card}
+          style={[styles.card, darkMode && styles.darkCard]}
           onPress={() => navigation.navigate("News")}
         >
-          <Text style={styles.cardTitle}>Nieuws</Text>
-          <Text style={styles.cardText}>
+          <Text style={[styles.cardTitle, darkMode && styles.darkText]}>
+            Nieuws
+          </Text>
+          <Text style={[styles.cardText, darkMode && styles.darkSubText]}>
             Lees nieuws en activiteiten van de school.
           </Text>
         </Pressable>
 
         <Pressable
-          style={styles.card}
+          style={[styles.card, darkMode && styles.darkCard]}
           onPress={() => navigation.navigate("Game")}
         >
-          <Text style={styles.cardTitle}>Mini-game</Text>
-          <Text style={styles.cardText}>Pak boeken en scoor punten.</Text>
+          <Text style={[styles.cardTitle, darkMode && styles.darkText]}>
+            Mini-game
+          </Text>
+          <Text style={[styles.cardText, darkMode && styles.darkSubText]}>
+            Pak boeken en scoor punten.
+          </Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -80,8 +112,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 40,
-    marginTop: 20,
+    marginBottom: 24,
+    marginTop: 40,
   },
 
   logo: {
@@ -104,6 +136,24 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     color: "#111111",
+  },
+
+  switchRow: {
+    backgroundColor: "#ffffff",
+    borderWidth: 1,
+    borderColor: "#E2E2E2",
+    borderRadius: 16,
+    padding: 14,
+    marginBottom: 28,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  switchText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333333",
   },
 
   hero: {
@@ -162,5 +212,22 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#555555",
     lineHeight: 22,
+  },
+
+  darkPage: {
+    backgroundColor: "#111111",
+  },
+
+  darkCard: {
+    backgroundColor: "#1E1E1E",
+    borderColor: "#333333",
+  },
+
+  darkText: {
+    color: "#ffffff",
+  },
+
+  darkSubText: {
+    color: "#CCCCCC",
   },
 });
