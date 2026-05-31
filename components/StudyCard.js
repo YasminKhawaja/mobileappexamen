@@ -1,8 +1,10 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function StudyCard({ study, onPress }) {
   return (
     <Pressable style={styles.card} onPress={onPress}>
+      <Image source={{ uri: study.image }} style={styles.image} />
+
       <Text style={styles.campus}>{study.campus}</Text>
       <Text style={styles.title}>{study.title}</Text>
       <Text style={styles.focus}>{study.focus}</Text>
@@ -22,6 +24,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: "#E2E2E2",
+    marginBottom: 16,
+  },
+
+  image: {
+    width: "100%",
+    height: 160,
+    borderRadius: 16,
     marginBottom: 16,
   },
 

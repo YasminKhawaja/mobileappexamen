@@ -5,6 +5,7 @@ const studies = [
     campus: "Botaniek",
     focus: "Gezondheid & Wetenschap",
     type: "Arbeidsmarkt",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
     description:
       "Als je kiest voor deze studierichting, ben je een geboren helper.",
   },
@@ -14,6 +15,7 @@ const studies = [
     campus: "Caputsteen",
     focus: "Integraal & Creatief",
     type: "Doorstroom",
+    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800",
     description: "Wetenschappers zijn broodnodig in onze maatschappij!",
   },
   {
@@ -22,6 +24,7 @@ const studies = [
     campus: "Caputsteen",
     focus: "Integraal & Creatief",
     type: "Doorstroom",
+    image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800",
     description:
       "Je oefent verschillende sporten, zowel individueel als in groep.",
   },
@@ -31,6 +34,7 @@ const studies = [
     campus: "Zandpoort",
     focus: "IT & Ondernemen",
     type: "Arbeidsmarkt",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800",
     description:
       "We brengen je de nodige kennis, vaardigheden en attitudes bij.",
   },
@@ -40,6 +44,7 @@ const studies = [
     campus: "Zandpoort",
     focus: "IT & Ondernemen",
     type: "Doorstroom",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800",
     description: "Bij BA Zandpoort leggen we de nadruk op wetenschappen en IT.",
   },
   {
@@ -48,6 +53,7 @@ const studies = [
     campus: "Stassart",
     focus: "Mens & Welzijn",
     type: "Dubbele finaliteit",
+    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800",
     description:
       "Ruime interesse voor reizen, duurzaamheid en communicatie zijn hier belangrijke kernwoorden.",
   },
@@ -57,6 +63,7 @@ const studies = [
     campus: "Stassart",
     focus: "Mens & Welzijn",
     type: "Arbeidsmarkt",
+    image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800",
     description:
       "Ben je dynamisch, creatief en hou je van mode? Dan is haarverzorging iets voor jou.",
   },
@@ -66,6 +73,7 @@ const studies = [
     campus: "Pitzemburg",
     focus: "Kennis & Onderzoek",
     type: "Dubbele finaliteit",
+    image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800",
     description: "Moderne talen heeft een sterk taalkundig profiel.",
   },
   {
@@ -74,6 +82,7 @@ const studies = [
     campus: "Pitzemburg",
     focus: "Kennis & Onderzoek",
     type: "Doorstroom",
+    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800",
     description:
       "Je maakt kennis met de talen en de leefwereld van de Grieken en de Romeinen.",
   },
@@ -83,6 +92,7 @@ const studies = [
     campus: "Nekkerspoel",
     focus: "Werken & Leren",
     type: "Arbeidsmarkt",
+    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800",
     description:
       "Deze duale opleiding leidt tot de beroepskwalificatie Keukenmedewerker.",
   },
@@ -92,6 +102,7 @@ const studies = [
     campus: "Botaniek",
     focus: "Gezondheid & Wetenschap",
     type: "Doorstroom",
+    image: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=800",
     description:
       "In BA Botaniek draait alles rond gezondheid en wetenschap binnen een warme context.",
   },
@@ -101,6 +112,7 @@ const studies = [
     campus: "Caputsteen",
     focus: "Integraal & Creatief",
     type: "Doorstroom",
+    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800",
     description:
       "Je gebruikt je verbeelding en fantasie om de wereld om je heen in beeld te brengen.",
   },

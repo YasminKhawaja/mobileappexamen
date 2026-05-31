@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Pressable,
   ScrollView,
@@ -9,7 +9,8 @@ import {
 } from "react-native";
 
 import StudyCard from "../components/StudyCard";
-import studies from "../data/studies";
+import localStudies from "../data/studies";
+import { getStudiesFromWebflow } from "../services/webflowApi";
 
 const campuses = [
   "Alle",
@@ -43,7 +44,28 @@ export default function StudyFinderScreen({ navigation }) {
   const [selectedFocus, setSelectedFocus] = useState("Alle");
   const [selectedType, setSelectedType] = useState("Alle");
 
-  const filteredStudies = studies.filter((study) => {
+  const [studyItems, setStudyItems] = useState(localStudies);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function loadStudies() {
+      try {
+        const apiStudies = await getStudiesFromWebflow();
+        setStudyItems(apiStudies);
+      } catch (err) {
+        console.log("STUDIES ERROR:", err);
+        setError("API niet geladen, lokale data wordt getoond.");
+        setStudyItems(localStudies);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadStudies();
+  }, []);
+
+  const filteredStudies = studyItems.filter((study) => {
     const matchesSearch = study.title
       .toLowerCase()
       .includes(searchText.toLowerCase());
@@ -167,6 +189,10 @@ export default function StudyFinderScreen({ navigation }) {
         <Text style={styles.resetButtonText}>Reset filters</Text>
       </Pressable>
 
+      {loading && <Text style={styles.resultText}>Opleidingen laden...</Text>}
+
+      {error !== "" && <Text style={styles.errorText}>{error}</Text>}
+
       <Text style={styles.resultText}>
         {filteredStudies.length} resultaten gevonden
       </Text>
@@ -287,5 +313,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#777777",
     marginBottom: 40,
+  },
+
+  errorText: {
+    color: "#C95B95",
+    fontSize: 15,
+    marginBottom: 16,
+    fontWeight: "bold",
   },
 });
