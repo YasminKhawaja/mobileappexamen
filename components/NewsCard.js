@@ -1,8 +1,10 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function NewsCard({ item, onPress }) {
   return (
     <Pressable style={styles.card} onPress={onPress}>
+      <Image source={{ uri: item.image }} style={styles.image} />
+
       <View style={styles.row}>
         <Text style={styles.category}>{item.category}</Text>
         <Text style={styles.readTime}>{item.readTime}</Text>
@@ -23,6 +25,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: "#E2E2E2",
+    marginBottom: 16,
+  },
+
+  image: {
+    width: "100%",
+    height: 160,
+    borderRadius: 16,
     marginBottom: 16,
   },
 

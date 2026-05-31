@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Pressable,
   ScrollView,
@@ -9,7 +9,8 @@ import {
 } from "react-native";
 
 import NewsCard from "../components/NewsCard";
-import news from "../data/news";
+import localNews from "../data/news";
+import { getNewsFromWebflow } from "../services/webflowApi";
 
 const categories = ["Alles", "Activiteit", "Terugblik", "Nieuws"];
 const sortOptions = ["A/Z", "Z/A"];
@@ -19,7 +20,27 @@ export default function NewsScreen({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState("Alles");
   const [selectedSort, setSelectedSort] = useState("A/Z");
 
-  const filteredNews = news
+  const [newsItems, setNewsItems] = useState(localNews);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function loadNews() {
+      try {
+        const apiNews = await getNewsFromWebflow();
+        setNewsItems(apiNews);
+      } catch (err) {
+        setError("API niet geladen, lokale data wordt getoond.");
+        setNewsItems(localNews);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadNews();
+  }, []);
+
+  const filteredNews = newsItems
     .filter((item) => {
       const matchesSearch = item.title
         .toLowerCase()
@@ -120,6 +141,10 @@ export default function NewsScreen({ navigation }) {
       <Pressable style={styles.resetButton} onPress={resetFilters}>
         <Text style={styles.resetButtonText}>Reset filters</Text>
       </Pressable>
+
+      {loading && <Text style={styles.resultText}>Nieuws laden...</Text>}
+
+      {error !== "" && <Text style={styles.errorText}>{error}</Text>}
 
       <Text style={styles.resultText}>
         {filteredNews.length} nieuwsberichten gevonden
@@ -241,5 +266,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#777777",
     marginBottom: 40,
+  },
+
+  errorText: {
+    color: "#C95B95",
+    fontSize: 15,
+    marginBottom: 16,
+    fontWeight: "bold",
   },
 });

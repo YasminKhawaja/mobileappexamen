@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function NewsDetailsScreen({ route }) {
   const { item } = route.params;
@@ -8,6 +8,8 @@ export default function NewsDetailsScreen({ route }) {
       <Text style={styles.label}>{item.category}</Text>
 
       <Text style={styles.title}>{item.title}</Text>
+
+      <Image source={{ uri: item.image }} style={styles.image} />
 
       <View style={styles.infoBox}>
         <Text style={styles.infoLabel}>Datum</Text>
@@ -46,7 +48,14 @@ const styles = StyleSheet.create({
     fontSize: 34,
     fontWeight: "bold",
     color: "#111111",
-    marginBottom: 24,
+    marginBottom: 20,
+  },
+
+  image: {
+    width: "100%",
+    height: 220,
+    borderRadius: 20,
+    marginBottom: 20,
   },
 
   infoBox: {
