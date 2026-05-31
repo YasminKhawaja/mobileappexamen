@@ -1,32 +1,77 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 
-export default function StudyFinderScreen() {
+import StudyCard from "../components/StudyCard";
+import studies from "../data/studies";
+
+export default function StudyFinderScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Studiekiezer</Text>
-      <Text style={styles.text}>
-        Hier komt de zoekfunctie voor opleidingen.
+    <ScrollView style={styles.page}>
+      <Text style={styles.label}>STUDIEKIEZER</Text>
+      <Text style={styles.title}>Vind jouw opleiding</Text>
+
+      <Text style={styles.subtitle}>
+        Zoek een opleiding en ontdek welke richting bij jou past.
       </Text>
-    </View>
+
+      <TextInput style={styles.input} placeholder="Zoek..." />
+
+      <Text style={styles.resultText}>
+        {studies.length} resultaten gevonden
+      </Text>
+
+      {studies.map((study) => (
+        <StudyCard
+          key={study.id}
+          study={study}
+          onPress={() => navigation.navigate("StudyDetails", { study: study })}
+        />
+      ))}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
-    padding: 24,
-    justifyContent: "center",
     backgroundColor: "#F7F8FA",
+    padding: 24,
+  },
+
+  label: {
+    color: "#95C23D",
+    fontSize: 14,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 8,
   },
 
   title: {
     fontSize: 36,
     fontWeight: "bold",
+    color: "#111111",
     marginBottom: 12,
   },
 
-  text: {
-    fontSize: 18,
+  subtitle: {
+    fontSize: 16,
     color: "#555555",
+    lineHeight: 22,
+    marginBottom: 20,
+  },
+
+  input: {
+    backgroundColor: "#ffffff",
+    borderWidth: 1,
+    borderColor: "#DADADA",
+    borderRadius: 16,
+    padding: 14,
+    fontSize: 16,
+    marginBottom: 16,
+  },
+
+  resultText: {
+    fontSize: 16,
+    marginBottom: 16,
+    color: "#333333",
   },
 });

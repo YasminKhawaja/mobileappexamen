@@ -1,28 +1,95 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-export default function CampusDetailsScreen() {
+export default function CampusDetailsScreen({ route }) {
+  const { campus } = route.params;
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Campus detail</Text>
-      <Text style={styles.text}>Hier komt meer informatie over de campus.</Text>
-    </View>
+    <ScrollView style={styles.page}>
+      <Text style={styles.label}>CAMPUS</Text>
+
+      <Text style={styles.title}>{campus.name}</Text>
+
+      <View style={styles.infoBox}>
+        <Text style={styles.infoLabel}>Focus</Text>
+        <Text style={styles.infoText}>{campus.focus}</Text>
+      </View>
+
+      <View style={styles.infoBox}>
+        <Text style={styles.infoLabel}>Adres</Text>
+        <Text style={styles.infoText}>{campus.address}</Text>
+      </View>
+
+      <View style={styles.descriptionBox}>
+        <Text style={styles.sectionTitle}>Over deze campus</Text>
+        <Text style={styles.description}>{campus.description}</Text>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
-    padding: 24,
-    justifyContent: "center",
     backgroundColor: "#F7F8FA",
+    padding: 24,
   },
+
+  label: {
+    color: "#95C23D",
+    fontSize: 14,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 8,
+  },
+
   title: {
     fontSize: 34,
     fontWeight: "bold",
-    marginBottom: 12,
+    color: "#111111",
+    marginBottom: 24,
   },
-  text: {
-    fontSize: 18,
-    color: "#555555",
+
+  infoBox: {
+    backgroundColor: "#ffffff",
+    padding: 18,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: "#E2E2E2",
+    marginBottom: 14,
+  },
+
+  infoLabel: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#C95B95",
+    marginBottom: 6,
+  },
+
+  infoText: {
+    fontSize: 17,
+    color: "#111111",
+  },
+
+  descriptionBox: {
+    backgroundColor: "#ffffff",
+    padding: 20,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: "#E2E2E2",
+    marginTop: 10,
+    marginBottom: 40,
+  },
+
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 12,
+    color: "#111111",
+  },
+
+  description: {
+    fontSize: 16,
+    color: "#444444",
+    lineHeight: 24,
   },
 });
