@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text } from "react-native";
 
 import CampusCard from "../components/CampusCard";
-import campuses from "../data/campuses";
+import localCampuses from "../data/campuses";
+import { getCampusesFromWebflow } from "../services/webflowApi";
 
 export default function CampusesScreen({ navigation }) {
+  const [campusItems, setCampusItems] = useState(localCampuses);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function loadCampuses() {
+      try {
+        const apiCampuses = await getCampusesFromWebflow();
+        setCampusItems(apiCampuses);
+      } catch (err) {
+        console.log("CAMPUSES ERROR:", err);
+        setError("API niet geladen, lokale data wordt getoond.");
+        setCampusItems(localCampuses);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadCampuses();
+  }, []);
+
   return (
     <ScrollView style={styles.page}>
       <Text style={styles.label}>CAMPUSSEN</Text>
@@ -13,11 +36,15 @@ export default function CampusesScreen({ navigation }) {
         Ontdek de verschillende campussen van Busleyden Atheneum.
       </Text>
 
+      {loading && <Text style={styles.resultText}>Campussen laden...</Text>}
+
+      {error !== "" && <Text style={styles.errorText}>{error}</Text>}
+
       <Text style={styles.resultText}>
-        {campuses.length} campussen gevonden
+        {campusItems.length} campussen gevonden
       </Text>
 
-      {campuses.map((campus) => (
+      {campusItems.map((campus) => (
         <CampusCard
           key={campus.id}
           campus={campus}
@@ -63,5 +90,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 16,
     color: "#333333",
+  },
+
+  errorText: {
+    color: "#C95B95",
+    fontSize: 15,
+    marginBottom: 16,
+    fontWeight: "bold",
   },
 });

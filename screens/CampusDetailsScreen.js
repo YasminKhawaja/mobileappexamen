@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function CampusDetailsScreen({ route }) {
   const { campus } = route.params;
@@ -8,6 +8,8 @@ export default function CampusDetailsScreen({ route }) {
       <Text style={styles.label}>CAMPUS</Text>
 
       <Text style={styles.title}>{campus.name}</Text>
+
+      <Image source={{ uri: campus.image }} style={styles.image} />
 
       <View style={styles.infoBox}>
         <Text style={styles.infoLabel}>Focus</Text>
@@ -46,7 +48,14 @@ const styles = StyleSheet.create({
     fontSize: 34,
     fontWeight: "bold",
     color: "#111111",
-    marginBottom: 24,
+    marginBottom: 20,
+  },
+
+  image: {
+    width: "100%",
+    height: 220,
+    borderRadius: 20,
+    marginBottom: 20,
   },
 
   infoBox: {
